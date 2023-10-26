@@ -93,6 +93,17 @@ route -n
 # restart PC
 ```
 
+#### Connection Idea
+
+```
+Node 1 --- (Key:100) --- Node 2
+  |                        |
+  |                        |
+  |                        |
+  |                        |
+  |                        |
+Node 4 --- (Key:300) ---- Node 3
+```
 # OpenFlow Shenanigans
 You will need to use this command to print OpenFlow descriptions based on the manual.
 ```
