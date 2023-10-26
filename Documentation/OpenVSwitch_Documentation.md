@@ -93,16 +93,25 @@ route -n
 # restart PC
 ```
 
-#### Connection Idea
+#### Topology Diagram
 
 ```
-Node 1 --- (Key:100) --- Node 2
-  |                        |
-  |                        |
-  |                        |
-  |                        |
-  |                        |
-Node 4 --- (Key:300) ---- Node 3
+      Node 1 ------- (Key:100) ------- Node 2
+[Bat0:100.100.1.1]               [Bat0:100.100.1.2]
+[GRE:169.254.0.10]               [GRE:169.254.0.20]
+        |                                |
+        |                                |
+        |                                |
+    (Key:400)                        (Key:200)
+        |                                | 
+        |                                |
+        |                                |
+Node 4 --- (Key:300) --- Node 3
+
+
+Controller
+[Bat0: 100.100.1.5]
+[GRE: None]
 ```
 # OpenFlow Shenanigans
 You will need to use this command to print OpenFlow descriptions based on the manual.
