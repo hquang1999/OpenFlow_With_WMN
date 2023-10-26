@@ -61,6 +61,7 @@ sudo ovs-vsctl set bridge br_x protocols=OpenFlow10,OpenFlow11,OpenFlow12,OpenFl
 
 #### Full Script
 ```
+sudo ovs-vsctl del-br br_x
 sudo ovs-vsctl add-br br_x
 
 sudo ovs-vsctl add-port br_x p_xy -- set interface p_xy type=[type] options:remote_ip=<ip of br_y> options:key=100
