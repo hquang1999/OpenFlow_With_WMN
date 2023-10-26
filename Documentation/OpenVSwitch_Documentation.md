@@ -79,10 +79,11 @@ sudo ovs-vsctl del-port <br_x> <port_x>
 
 #### Probe (GRE)
 ```
+sudo ovs-vsctl del-port br_x probe 
 sudo ovs-vsctl add-port br_x probe -- set Interface probe type=internal
 
-sudo ip addr add 169.254.0.10/16 dev probe
-sudo ifconfig probe 169.254.0.10/16 up
+sudo ip addr add 169.254.0.x/16 dev probe
+sudo ifconfig probe 169.254.0.x/16 up
 
 sudo ovs-vsctl show
 ```
