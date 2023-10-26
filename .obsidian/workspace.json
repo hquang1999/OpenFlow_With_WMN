@@ -86,7 +86,7 @@
               "type": "backlink",
               "state": {
                 "file": "README.md",
-                "collapseAll": false,
+                "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
@@ -129,12 +129,12 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -146,7 +146,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "38828695f933f81a",
+  "active": "99ff88ed9067b031",
   "lastOpenFiles": [
     "Documentation/BATMAN_Documentation.md"
   ]
