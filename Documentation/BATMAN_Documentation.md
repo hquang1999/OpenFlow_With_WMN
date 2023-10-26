@@ -166,10 +166,12 @@ sudo ip link set wlan0 up
 
 # Setup batman
 sleep 1s
+# FOR BATMAN VERSIONS
+# sudo batctl ra BATMAN_V
 sudo batctl if add wlan0
 
 # x = [1,2,3,4,...]
-sleep 5s 
+sleep 1s 
 sudo ip addr add 100.100.1.x/24 dev bat0
 sudo ifconfig bat0 100.100.1.x/24 up
 ```
