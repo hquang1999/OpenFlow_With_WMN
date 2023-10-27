@@ -73,8 +73,6 @@ B.A.T.M.A.N. V adopts the strategy of 'divide & conquer' to handle these differe
  |                        TVLV data ...                          |
 ```
 
-  
-
 Nodes rebroadcast messages they receive and keep track of originator addresses they receive in an [originator table](https://www.open-mesh.org/projects/batman-adv/wiki/Understand-your-batman-adv-network)
 
 This table can be used to route messages to non-adjacent peers by checking transmit quality (TQ) levels of known connections through neighbors.
@@ -129,7 +127,7 @@ manpage: <https://downloads.open-mesh.org/batman/manpages/batctl.8.html>
 overview for adv: <https://www.open-mesh.org/projects/batman-adv/wiki/Doc-overview>
 
 ## Batman Installation
-Kernal must be above debian 2020. Currently using debian-2023.0-1 [batman-adv: 2022.3] on Pi. This version can output in JSON. No need to write a parsor.
+Kernal must be $\ge$ Debian 2021.4 for json output. Currently using debian-2023.0-1 [batman-adv: 2022.3] on Pi. This version can output in JSON. No need to write a parser.
 ```
 sudo apt update -y
 sudo apt upgrade -y
@@ -145,8 +143,8 @@ sudo batctl meshif bat0 nj
 #### Batman Script for Rasp 4
 Original [Reddit Article](https://www.reddit.com/r/darknetplan/comments/68s6jp/how_to_configure_batmanadv_on_the_raspberry_pi_3/)
 ##### Make sure that the wifi is disabled and the pi is connected via Ethernet
-* Make a script called batsetup.sh. 
-* sudo chmod +x batsetup.sh 
+* Make a script called batsetup.sh.
+* sudo chmod +x batsetup.sh
 * ./batsetup.sh
 ```
 # Activate batman-adv
@@ -171,14 +169,36 @@ sleep 1s
 sudo batctl if add wlan0
 
 # x = [1,2,3,4,...]
-sleep 1s 
+sleep 1s
 sudo ip addr add 100.100.1.x/24 dev bat0
-sudo ifconfig bat0 100.100.1.x/24 up
+sudo ip link set bat0 100.100.1.x/24 up
 ```
 Checking the network:
 ```
 route -n
 
 # ipv6 of wlan0 should match other pi's
-sudo batctl o 
+sudo batctl o
 ```
+
+# Reading State in Python
+To read the neighbor table use [[json.py]]
+
+To install on the pi's:
+1. Make a virtual environment
+```bash
+mkdir <venv_dir>
+python3 -m venv <venv_dir>
+```
+2. Install [json-parser](https://pypi.org/project/json-parser/)
+```
+<venv_dir>/bin/pip3 install json-parser
+```
+3. Run the script
+```
+<venv_dir>/bin/python3 json.py
+```
+
+To get other information from the other batman commands, modify the command in the script (e.g. `nj` becomes `oj` for the originators table).
+
+*Note* that the `data` variable returned from parsing can be indexed like `data['value']`
