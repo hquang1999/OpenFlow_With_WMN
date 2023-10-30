@@ -87,6 +87,7 @@ sudo ip addr add 169.254.0.x/16 dev probe
 sudo ifconfig probe 169.254.0.x/16 up
 
 sudo ovs-vsctl show
+sudo ip link set br_x up
 ```
 #### Flushing Routing Table
 ```
