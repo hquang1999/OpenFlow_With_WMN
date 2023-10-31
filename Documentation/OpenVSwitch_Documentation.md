@@ -70,6 +70,8 @@ sudo ovs-vsctl set-controller br_x tcp:<controller ip>
 
 sudo ovs-vsctl set bridge br_x protocols=OpenFlow10,OpenFlow11,OpenFlow12,OpenFlow13,OpenFlow14,OpenFlow15 
 
+sudo ip link set br_x up
+
 sudo ovs-vsctl show
 ```
 #### Deletion
@@ -87,7 +89,6 @@ sudo ip addr add 169.254.0.x/16 dev probe
 sudo ifconfig probe 169.254.0.x/16 up
 
 sudo ovs-vsctl show
-sudo ip link set br_x up
 ```
 #### Flushing Routing Table
 ```
