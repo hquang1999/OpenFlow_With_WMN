@@ -105,10 +105,8 @@ sudo ip link set vxlan0 up
 #### Topology Diagram
 
 ```
-```
   Node 1 * {br_1} ------- (Key:100) ------- Node 2 * {br_2}
 [Bat0: 100.100.1.1]                       [Bat0: 100.100.1.2]
-[GRE: 169.254.0.10]                       [GRE: 169.254.0.20]
          |                                         |
          |                                         |
          |                                         |
@@ -120,12 +118,9 @@ sudo ip link set vxlan0 up
          |                                         |
   Node 4 * {br_4} ------- (Key:300) ------- Node 3 * {br_3}
 [Bat0: 100.100.1.4]                       [Bat0: 100.100.1.3]
-[GRE: 169.254.0.40]                       [GRE: 169.254.0.30]
- 
 
-Controller (OpenFlow14)
+Controller (OpenFlow13)
 [Bat0: 100.100.1.5]
-[GRE: None]
 ```
 # OpenFlow Shenanigans
 You will need to use this command to print OpenFlow descriptions based on the manual.
