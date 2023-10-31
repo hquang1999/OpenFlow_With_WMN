@@ -97,10 +97,14 @@ route -n
 # restart PC
 ```
 #### VxLAN Tunnel
-sudo ip add vxlan0 type vxlan id 100 dstport 
+```
+sudo ip add vxlan0 type vxlan id 100 dstport 4789 local \<src_ip\> remote \<remote_ip\>
+sudo ip link vxlan0 up
+```
 
 #### Topology Diagram
 
+```
 ```
   Node 1 * {br_1} ------- (Key:100) ------- Node 2 * {br_2}
 [Bat0: 100.100.1.1]                       [Bat0: 100.100.1.2]
