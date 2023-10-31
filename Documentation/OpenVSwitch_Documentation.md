@@ -99,7 +99,7 @@ route -n
 #### VxLAN Tunnel
 ```
 sudo ip link add vxlan0 type vxlan id 100 dstport 4789 local <src_ip> remote <remote_ip>
-sudo ip link vxlan0 up
+sudo ip link set vxlan0 up
 ```
 
 #### Topology Diagram
