@@ -96,6 +96,8 @@ sudo ip route flush table main
 route -n
 # restart PC
 ```
+#### VxLAN Tunnel
+sudo ip add vxlan0 type vxlan id 100 dstport 
 
 #### Topology Diagram
 
