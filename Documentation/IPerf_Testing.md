@@ -7,3 +7,8 @@ On another device, do:
 ```
 iperf -c <server ip>
 ```
+
+tcpdump:
+```
+sudo tcpdump -i wlan0 -n port 4789
+```
