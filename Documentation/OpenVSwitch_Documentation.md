@@ -115,11 +115,11 @@ sudo ip link set vxlan0 up
          |                                         |
          |                                         |
          |                                         |
-     (Key:400)                                 (Key:200)
+     (Key:100)                                 (Key:100)
          |                                         |
          |                                         |
          |                                         |
-  Node 4 * {br_4} ------- (Key:300) ------- Node 3 * {br_3}
+  Node 4 * {br_4} ------- (Key:100) ------- Node 3 * {br_3}
 [VxLAN: 50.50.50.4]                       [VxLAN: 50.50.50.3]
 [Bat0: 100.100.1.4]                       [Bat0: 100.100.1.3]
 
