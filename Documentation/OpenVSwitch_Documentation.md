@@ -74,6 +74,10 @@ sudo ip link set br_x up
 
 sudo ovs-vsctl show
 ```
+
+#### Connecting Host to Bridge
+OpenVSwitch is desi
+
 #### Deletion
 ```
 sudo ovs-vsctl del-br <br_x>
