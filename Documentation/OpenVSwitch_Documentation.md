@@ -76,7 +76,7 @@ sudo ovs-vsctl show
 ```
 
 #### Connecting Host to Bridge
-OpenVSwitch is desi
+OpenVSwitch is designed to connect virtual machines together across networks. It acts as an overlay switch/network.
 
 #### Deletion
 ```
