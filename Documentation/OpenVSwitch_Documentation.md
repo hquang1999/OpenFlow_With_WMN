@@ -99,7 +99,8 @@ sudo ovs-vsctl show
 
 OpenVSwitch is designed to connect virtual machines together across networks. It acts as an overlay switch/network. What we do is create a switch that will connect the VM or for this case, a simple tap port, to itself and establish a vxlan connection to the pi across the network. 
 
-What VxLAN does is that it map's the tap port's ip with the underlying network ip, then it encapsulates the tap port's packets with the underlying network, essentially making that packet an underlying network packet. For this case, the underlying network will be B.A.T.M.A.N
+What VxLAN does is that it map's the tap port's ip with the underlying network ip, then it encapsulates the tap port's packets with the underlying network, essentially making that packet an underlying network packet. For this case, the underlying network will be B.A.T.M.A.N. The packet will be pushed to the other side where it exits the destination's VTEP, gets de-capsulated, then pushed up to the destination tap port. 
+
 
 #### Topology Diagram
 
