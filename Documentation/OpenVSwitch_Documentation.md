@@ -137,9 +137,11 @@ sudo ovs-ofctl -O OpenFlowV <setting> br_x
 
 #### Flow Entry 
 ```
+// ---- This one is the output flow ---- //
 table=0,priority=1,in_port=1,ip,nw_src=50.50.50.1,nw_dst=50.50.50.2,actions=output:10
-  table=0,priority=1,in_port=10,ip,nw_src=50.50.50.2,nw_dst=50.50.50.1,actions=output:1
-
+// ---- This one is the input flow ---- //
+table=0,priority=1,in_port=10,ip,nw_src=50.50.50.2,nw_dst=50.50.50.1,actions=output:1
+// ---- This one is for the controller ---- //
 table=0,priority=0,actions=CONTROLLER:65535
 ```
 
