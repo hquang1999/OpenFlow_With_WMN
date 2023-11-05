@@ -64,26 +64,14 @@ sudo ovs-vsctl set bridge br_x protocols=OpenFlow10,OpenFlow11,OpenFlow12,OpenFl
 sudo ovs-vsctl del-br br_x
 sudo ovs-vsctl add-br br_x
 
-sudo ovs-vsctl add-port br_x p_xy -- set interface p_xy type=[type] options:remote_ip=<ip of br_y> options:key=100 of
+sudo ovs-vsctl add-port br_x p_xy -- set interface p_xy type=[type] options:remote_ip=<ip of br_y> options:key=100 
 
 sudo ovs-vsctl set-controller br_x tcp:<controller ip>
 
 sudo ovs-vsctl set bridge br_x protocols=OpenFlow13 
 
-sudo ip link set br_x up
-
 sudo ovs-vsctl show
 ```
-
-#### Connecting Host to Bridge
-OpenVSwitch is designed to connect virtual machines together across networks. It acts as an overlay switch/network.
-
-#### Deletion
-```
-sudo ovs-vsctl del-br <br_x>
-sudo ovs-vsctl del-port <br_x> <port_x>
-```
-
 #### Probe 
 ```
 sudo ovs-vsctl del-port br_x probe 
@@ -94,6 +82,14 @@ sudo ifconfig probe 50.50.50.x/24 mtu 1400 up
 
 sudo ovs-vsctl show
 ```
+#### Connecting Host to Bridge
+OpenVSwitch is designed to connect virtual machines together across networks. It acts as an overlay switch/network.
+#### Deletion
+```
+sudo ovs-vsctl del-br <br_x>
+sudo ovs-vsctl del-port <br_x> <port_x>
+```
+
 #### Flushing Routing Table
 ```
 sudo ip route flush table main
@@ -110,7 +106,7 @@ sudo ip link set vxlan0 up
 
 ```
   Node 1 * {br_1} ------- (Key:100) ------- Node 2 * {br_2}
-[VxLAN: 50.50.50.1]                       [VxLAN: 50.50.50.2]
+[Probe: 50.50.50.1]                       [Probe: 50.50.50.2]
 [Bat0: 100.100.1.1]                       [Bat0: 100.100.1.2]
          |                                         |
          |                                         |
@@ -120,7 +116,7 @@ sudo ip link set vxlan0 up
          |                                         |
          |                                         |
   Node 4 * {br_4} ------- (Key:100) ------- Node 3 * {br_3}
-[VxLAN: 50.50.50.4]                       [VxLAN: 50.50.50.3]
+[Probe: 50.50.50.4]                       [Probe: 50.50.50.3]
 [Bat0: 100.100.1.4]                       [Bat0: 100.100.1.3]
 
 Controller (OpenFlow13)
