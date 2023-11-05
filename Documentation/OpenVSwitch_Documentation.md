@@ -16,14 +16,17 @@ OVS with SDN:
 ```
 sudo apt install openvswitch-switch
 ```
+
 #### Show All OpenVSwitch Options
 ```
 sudo ovs-vsctl show
 ```
+
 #### Create Bridge
 ```
 sudo ovs-vsctl add-br <br_x>
 ```
+
 #### Create Port (VTEP)
 ```
 sudo ovs-vsctl add-port <br_x> <port_x> -- set Interface <port_x> type=[type] options:remote_ip=<remote_ip> options:keys=flow 
@@ -37,10 +40,12 @@ You can set the interface individually without add-port:
 ```
 sudo ovs-vsctl set Interface <port_x> type=[type] options:remote_ip=<remote_ip> options:keys=flow 
 ```
+
 #### Connect to Controller
 ```
 sudo ovs-vsctl set-controller <br_x> tcp:<controller_ip>:<port>
 ```
+
 #### IP Adding Shenanigans
 This is for if you want to create a test port within the switch. You must create an internal port within the switch. type=internal, no remote_ip.
 ```
@@ -56,7 +61,7 @@ route -n
 #### Set Bridge Protocols
 ```
 # Please check OVS version compatibility before doing all OpenFlow versions. At minimum, it should do OpenFlow13
-sudo ovs-vsctl set bridge br_x protocols=OpenFlow10,OpenFlow11,OpenFlow12,OpenFlow13
+sudo ovs-vsctl set bridge br_x protocols=OpenFlow10,OpenFlow11,OpenFlow12,OpenFlow13,OpenFlow14
 ```
 
 #### Deletion
@@ -68,11 +73,10 @@ sudo ovs-vsctl del-port <br_x> <port_x>
 #### Flushing Routing Table
 ```
 sudo ip route flush table main
-route -n
-# restart PC
+sudo reboot
 ```
 
-#### Full Script
+### FULL SCRIPT
 ```
 sudo ovs-vsctl del-br br_x
 sudo ovs-vsctl add-br br_x
@@ -85,7 +89,7 @@ sudo ovs-vsctl set bridge br_x protocols=OpenFlow13
 
 sudo ovs-vsctl show
 ```
-#### Probe Script 
+### PROBE SCRIPT
 ```
 sudo ovs-vsctl del-port br_x probe 
 sudo ovs-vsctl add-port br_x probe -- set Interface probe type=internal
@@ -101,7 +105,8 @@ OpenVSwitch is designed to connect virtual machines together across networks. It
 
 What VxLAN does is that it map's the tap port's ip with the underlying network ip, then it encapsulates the tap port's packets with the underlying network, essentially making that packet an underlying network packet. For this case, the underlying network will be B.A.T.M.A.N. The packet will be pushed to the other side where it exits the destination's VTEP, gets de-capsulated, then pushed up to the destination tap port. 
 
-
+![VXLAN](vxlan_encap.png)
+[Image Source](https://medium.com/@blackvvine/sdn-part-2-building-an-sdn-playground-on-the-cloud-using-open-vswitch-and-opendaylight-a0e2de029ce1)
 #### Topology Diagram
 
 ```
