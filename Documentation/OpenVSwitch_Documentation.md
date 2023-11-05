@@ -106,6 +106,7 @@ OpenVSwitch is designed to connect virtual machines together across networks. It
 What VxLAN does is that it map's the tap port's ip with the underlying network ip, then it encapsulates the tap port's packets with the underlying network, essentially making that packet an underlying network packet. For this case, the underlying network will be B.A.T.M.A.N. The packet will be pushed to the other side where it exits the destination's VTEP, gets de-capsulated, then pushed up to the destination tap port. 
 
 ![](images/vxlan_encap.png)
+
 [Image Source](https://medium.com/@blackvvine/sdn-part-2-building-an-sdn-playground-on-the-cloud-using-open-vswitch-and-opendaylight-a0e2de029ce1)
 #### Topology Diagram
 
