@@ -64,11 +64,11 @@ sudo ovs-vsctl set bridge br_x protocols=OpenFlow10,OpenFlow11,OpenFlow12,OpenFl
 sudo ovs-vsctl del-br br_x
 sudo ovs-vsctl add-br br_x
 
-sudo ovs-vsctl add-port br_x p_xy -- set interface p_xy type=[type] options:remote_ip=<ip of br_y> options:key=100
+sudo ovs-vsctl add-port br_x p_xy -- set interface p_xy type=[type] options:remote_ip=<ip of br_y> options:key=100 of
 
 sudo ovs-vsctl set-controller br_x tcp:<controller ip>
 
-sudo ovs-vsctl set bridge br_x protocols=OpenFlow10,OpenFlow11,OpenFlow12,OpenFlow13,OpenFlow14,OpenFlow15 
+sudo ovs-vsctl set bridge br_x protocols=OpenFlow13 
 
 sudo ip link set br_x up
 
@@ -84,13 +84,13 @@ sudo ovs-vsctl del-br <br_x>
 sudo ovs-vsctl del-port <br_x> <port_x>
 ```
 
-#### Probe (GRE)
+#### Probe 
 ```
 sudo ovs-vsctl del-port br_x probe 
 sudo ovs-vsctl add-port br_x probe -- set Interface probe type=internal
 
-sudo ip addr add 169.254.0.x/16 dev probe
-sudo ifconfig probe 169.254.0.x/16 up
+sudo ip addr add 50.50.50.x/24 dev probe
+sudo ifconfig probe 50.50.50.x/24 mtu 1400 up
 
 sudo ovs-vsctl show
 ```
@@ -135,3 +135,12 @@ sudo ovs-ofctl -O OpenFlowV <setting> br_x
 * \<setting\> are the settings provided by the manual
 * br_x is the controller / bridge 
 
+#### Flow Entry 
+```
+table=0,priority=1,in_port=1,ip,nw_src=50.50.50.1,nw_dst=50.50.50.2,actions=output:10
+  table=0,priority=1,in_port=10,ip,nw_src=50.50.50.2,nw_dst=50.50.50.1,actions=output:1
+
+table=0,priority=0,actions=CONTROLLER:65535
+```
+
+10 is your vtep (p_21 as an example) port. 1 is your probe port. 
