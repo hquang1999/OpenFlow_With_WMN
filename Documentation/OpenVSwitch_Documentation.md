@@ -24,7 +24,7 @@ sudo ovs-vsctl show
 ```
 sudo ovs-vsctl add-br <br_x>
 ```
-#### Create Port
+#### Create Port (VTEP)
 ```
 sudo ovs-vsctl add-port <br_x> <port_x> -- set Interface <port_x> type=[type] options:remote_ip=<remote_ip> options:keys=flow 
 ```
@@ -59,6 +59,19 @@ route -n
 sudo ovs-vsctl set bridge br_x protocols=OpenFlow10,OpenFlow11,OpenFlow12,OpenFlow13
 ```
 
+#### Deletion
+```
+sudo ovs-vsctl del-br <br_x>
+sudo ovs-vsctl del-port <br_x> <port_x>
+```
+
+#### Flushing Routing Table
+```
+sudo ip route flush table main
+route -n
+# restart PC
+```
+
 #### Full Script
 ```
 sudo ovs-vsctl del-br br_x
@@ -72,7 +85,7 @@ sudo ovs-vsctl set bridge br_x protocols=OpenFlow13
 
 sudo ovs-vsctl show
 ```
-#### Probe 
+#### Probe Script 
 ```
 sudo ovs-vsctl del-port br_x probe 
 sudo ovs-vsctl add-port br_x probe -- set Interface probe type=internal
@@ -83,24 +96,10 @@ sudo ifconfig probe 50.50.50.x/24 mtu 1400 up
 sudo ovs-vsctl show
 ```
 #### Connecting Host to Bridge
-OpenVSwitch is designed to connect virtual machines together across networks. It acts as an overlay switch/network.
-#### Deletion
-```
-sudo ovs-vsctl del-br <br_x>
-sudo ovs-vsctl del-port <br_x> <port_x>
-```
 
-#### Flushing Routing Table
-```
-sudo ip route flush table main
-route -n
-# restart PC
-```
-#### VxLAN Tunnel
-```
-sudo ip link add vxlan0 type vxlan id 100 dstport 4789 local <src_ip> remote <remote_ip>
-sudo ip link set vxlan0 up
-```
+OpenVSwitch is designed to connect virtual machines together across networks. It acts as an overlay switch/network. What we do is create a switch that will connect the VM or for this case, a simple tap port, to itself and establish a vxlan connection to the pi across the network. 
+
+What VxLAN does is that it map's the tap port's ip with the underlying network ip, then it encapsulates the tap port's packets with the underlying network, essentially making that packet an underlying network packet. For this case, the underlying network will be B.A.T.M.A.N
 
 #### Topology Diagram
 
