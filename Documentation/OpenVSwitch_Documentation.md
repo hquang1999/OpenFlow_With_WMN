@@ -81,7 +81,7 @@ sudo reboot
 sudo ovs-vsctl del-br br_x
 sudo ovs-vsctl add-br br_x
 
-sudo ovs-vsctl add-port br_x p_xy -- set interface p_xy type=[type] options:remote_ip=<ip of br_y> options:key=100 
+sudo ovs-vsctl add-port br_x p_xy -- set interface p_xy type=vxlan options:remote_ip=<ip of br_y> options:key=100 ofport_request=10
 
 sudo ovs-vsctl set-controller br_x tcp:<controller ip>
 
