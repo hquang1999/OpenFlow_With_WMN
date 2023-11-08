@@ -111,17 +111,17 @@ What VxLAN does is that it map's the tap port's ip with the underlying network i
 #### Topology Diagram
 
 ```
-  Node 1 * {br_1} ------- (Key:100) ------- Node 2 * {br_2}
+  Node 1 * {br_1} ------- (Port:10) ------- Node 2 * {br_2}
 [Probe: 50.50.50.1]                       [Probe: 50.50.50.2]
 [Bat0: 100.100.1.1]                       [Bat0: 100.100.1.2]
          |                                         |
          |                                         |
          |                                         |
-     (Key:100)                                 (Key:100)
+     (Port:40)                                 (Port:20)
          |                                         |
          |                                         |
          |                                         |
-  Node 4 * {br_4} ------- (Key:100) ------- Node 3 * {br_3}
+  Node 4 * {br_4} ------- (Port:30) ------- Node 3 * {br_3}
 [Probe: 50.50.50.4]                       [Probe: 50.50.50.3]
 [Bat0: 100.100.1.4]                       [Bat0: 100.100.1.3]
 
