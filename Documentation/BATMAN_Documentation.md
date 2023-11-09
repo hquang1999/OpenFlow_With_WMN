@@ -171,7 +171,7 @@ sudo batctl if add wlan0
 # x = [1,2,3,4,...]
 sleep 1s
 sudo ip addr add 100.100.1.x/24 dev bat0
-sudo ip link set bat0 100.100.1.x/24 up
+sudo ifconfig set bat0 100.100.1.x/24 up
 ```
 
 You have to make sure all the AP's are the same. It should be the cell ID you see when calling iwconfig. If not, use this command:
