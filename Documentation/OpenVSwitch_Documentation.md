@@ -92,7 +92,7 @@ sudo ovs-vsctl show
 ### PROBE SCRIPT
 ```
 sudo ovs-vsctl del-port br_x probe 
-sudo ovs-vsctl add-port br_x probe -- set Interface probe type=internal
+sudo ovs-vsctl add-port br_x probe -- set Interface probe type=internal ofport_request=1
 
 sudo ip addr add 50.50.50.x/24 dev probe
 sudo ifconfig probe 50.50.50.x/24 mtu 1400 up
