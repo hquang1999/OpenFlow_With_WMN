@@ -142,7 +142,7 @@ sudo batctl meshif bat0 nj
 ```
 #### Batman Script for Rasp 4
 Original [Reddit Article](https://www.reddit.com/r/darknetplan/comments/68s6jp/how_to_configure_batmanadv_on_the_raspberry_pi_3/)
-##### Make sure that the wifi is disabled and the pi is connected via Ethernet
+##### Make sure that the wifi is disabled
 * Make a script called batsetup.sh.
 * sudo chmod +x batsetup.sh
 * ./batsetup.sh
