@@ -1,7 +1,7 @@
-Ryu is a python based SDN controller with API's that allows you to write a controller from scratch. However, it sucks to use.
+Ryu is a python based SDN controller with API's that allows you to write a controller from scratch. However, it sucks to use. It's also discontinued so we are on our own for fixing stuff. 
 
 ### REQUIREMENTS
-I recommend making a 
+I recommend making a python environment for this before you install ryu.
 ```
 Python 3.8 (Above versions like 3.10 will not work!!!)
 Pip 20.0.2
@@ -33,4 +33,9 @@ tinyrpc==1.0.4
 urllib3==2.0.6
 WebOb==1.8.7
 wrapt==1.15.0
+```
+[]{https://ryu.readthedocs.io/en/latest/getting_started.html}
+I recommend to install ryu from pip:
+```
+pip install ryu
 ```
