@@ -66,4 +66,19 @@ For just the controller, we will be using simple_switch_13.py
 ```
 ryu-manager simple_switch_13.py
 ```
-NOTE: you must be in the ryu folder in or
+NOTE: you must be in the ryu folder in order to use ryu-manager. I recommend you go to the app file path all the time because most of our applications are there.
+
+### Rest API
+This API allows you to give your switches flow entries from the controller. You must be running:
+```
+ryu-manager simple_switch_13.py ofctl_rest.py
+```
+
+[Rest API Documentation](https://ryu.readthedocs.io/en/latest/app/ofctl_rest.html)
+
+Once you have both of those programs running, lets try out a command:
+```
+curl -X GET http://localhost:8080/stats/switches
+```
+This command will give you all the ID's of every switch you have connected to the controller. 
+NOTE: You must running this on the same computer as t
