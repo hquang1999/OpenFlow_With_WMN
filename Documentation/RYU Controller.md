@@ -34,8 +34,21 @@ urllib3==2.0.6
 WebOb==1.8.7
 wrapt==1.15.0
 ```
-[]{https://ryu.readthedocs.io/en/latest/getting_started.html}
+
+[Ryu Download Guide](https://ryu.readthedocs.io/en/latest/getting_started.html)
 I recommend to install ryu from pip:
 ```
 pip install ryu
 ```
+
+Then you must download the [git](https://github.com/faucetsdn/ryu) for the controller and additional programs.
+
+Alternatively, you can download the git and install from there:
+```
+git clone https://github.com/faucetsdn/ryu.git
+cd ryu
+pip install .
+```
+
+### Testing Download
+This is 
