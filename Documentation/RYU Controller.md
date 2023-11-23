@@ -34,6 +34,7 @@ urllib3==2.0.6
 WebOb==1.8.7
 wrapt==1.15.0
 ```
+I believe there is a wheel dependency in here but I forgot what it was. You'll have to wait for the pip install to error out to see what you need.
 
 [Ryu Download Guide](https://ryu.readthedocs.io/en/latest/getting_started.html)
 I recommend to install ryu from pip:
@@ -51,4 +52,18 @@ pip install .
 ```
 
 ### Testing Download
-This is 
+This is when you'll test if your download works:
+```
+ryu-manager app.py
+```
+
+The apps we will be using are located in
+```
+ryu/ryu/app/
+```
+
+For just the controller, we will be using simple_switch_13.py
+```
+ryu-manager simple_switch_13.py
+```
+NOTE: you must be in the ryu folder in or
