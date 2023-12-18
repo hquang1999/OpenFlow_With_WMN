@@ -89,3 +89,10 @@ NOTE: You must running this on the same computer as the controller. Also, it wil
 ### Running w/ Better GUI
 
 You can run RYU with the default GUI but it's too bare bones. I recommend you use this GUI instead: [https://github.com/martimy/flowmanager](https://github.com/martimy/flowmanager)
+
+To run:
+```
+ryu-manager --observe-links ~/flowmanager/flowmanager.py ryu.app.simple_switch_13
+```
+
+Online GUI Address: [http://localhost:8080/home/index.html](http://localhost:8080/home/index.html)
