@@ -88,4 +88,4 @@ NOTE: You must running this on the same computer as the controller. Also, it wil
 
 ### Running w/ Better GUI
 
-You can run RYU with the default GUI but it'
+You can run RYU with the default GUI but it's too bare bones. I recommend you use this GUI instead: [https://github.com/martimy/flowmanager](https://github.com/martimy/flowmanager)
