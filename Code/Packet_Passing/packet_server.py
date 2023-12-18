@@ -1,9 +1,14 @@
 import scapy.all as scapy
 
-def server_packet_handler(packet):
-    if packet.haslayer(Raw):
-        data = packet[Raw].load.decode('utf-8')
-        print(f"Server received: {data}")
+request = scapy.ARP()
 
-# Start the server and sniff packets
-sniff(prn=server_packet_handler, store=0, filter="tcp port 12345")
+request.pdst = 'x'
+broadcast = scapy.Ether()
+
+broadcast.dst = 'ff:ff:ff:ff:ff:ff'
+
+request_broadcast = broadcast / request
+clients = scapy.srp(request_broadcast, timeout = 1)[0]
+
+for element in clients:
+    print(element[1].psrc + "    " + element[1].hwsrc)
