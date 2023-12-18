@@ -1,4 +1,5 @@
 import scapy.all as scapy
 
-traffic = scapy.sniff(iface="ens6", count=5)
-traffic.nsummary()
+traffic = scapy.sniff(filter="tcp", count=5)
+
+
