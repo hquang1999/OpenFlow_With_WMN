@@ -85,3 +85,7 @@ curl -X GET http://localhost:8080/stats/switches
 This command will give you all the ID's of every switch you have connected to the controller. 
 
 NOTE: You must running this on the same computer as the controller. Also, it will give you a really long ID.
+
+### Running w/ Better GUI
+
+You can run RYU with the default GUI but it'
