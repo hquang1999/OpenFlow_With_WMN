@@ -2,6 +2,8 @@ Ryu is a python based SDN controller with API's that allows you to write a contr
 
 ### REQUIREMENTS
 I recommend making a python environment for this before you install Ryu.
+
+THERE IS A requirements.txt PROVIDED!!!!
 ```
 Python 3.8 (Above versions like 3.10 will not work!!!)
 Pip 20.0.2
