@@ -5,7 +5,7 @@ I recommend making a python environment for this before you install Ryu.
 
 THERE IS A requirements.txt PROVIDED!!!!
 ```
-Python 3.8 (Above versions like 3.10 will not work!!!)
+Python 3.8.10 (Above versions like 3.10 will not work!!!)
 Pip 20.0.2
 
 certifi==2023.7.22
