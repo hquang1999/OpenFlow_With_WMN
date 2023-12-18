@@ -1,7 +1,7 @@
 Ryu is a python based SDN controller with API's that allows you to write a controller from scratch. However, it sucks to use. It's also discontinued so we are on our own for fixing stuff. 
 
 ### REQUIREMENTS
-I recommend making a python environment for this before you install ryu.
+I recommend making a python environment for this before you install Ryu.
 ```
 Python 3.8 (Above versions like 3.10 will not work!!!)
 Pip 20.0.2
@@ -42,6 +42,8 @@ I recommend to install ryu from pip:
 pip install ryu
 ```
 
+You will see Ryu 4.34 in your pip freeze. However, this does not gurantee that it works. 
+
 Then you must download the [git](https://github.com/faucetsdn/ryu) for the controller and additional programs.
 
 Alternatively, you can download the git and install from there:
@@ -81,4 +83,5 @@ Once you have both of those programs running, lets try out a command:
 curl -X GET http://localhost:8080/stats/switches
 ```
 This command will give you all the ID's of every switch you have connected to the controller. 
-NOTE: You must running this on the same computer as t
+
+NOTE: You must running this on the same computer as the controller. Also, it will give you a really long ID.
