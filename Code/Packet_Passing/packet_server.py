@@ -1,9 +1,9 @@
 import scapy.all as scapy
 
 def process_packet(packet):
-    #packet.show()
-    destination_mac = packet[0][0].dst
-    destination_ip = packet[0][1].dst
+    packet.show()
+    destination_mac = packet[0][0].src
+    destination_ip = packet[0][1].src
     print(f"dst_IP = {destination_ip} | dst_MAC = {destination_mac}")
 
 
