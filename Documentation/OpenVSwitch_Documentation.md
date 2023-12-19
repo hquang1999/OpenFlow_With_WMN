@@ -85,13 +85,22 @@ sudo ovs-vsctl add-port br_x p_xy -- set interface p_xy type=vxlan options:remot
 
 sudo ovs-vsctl set-controller br_x tcp:<controller ip>:6653
 
-sudo ovs-vsctl set bridge br_x protocols=OpenFlow13 
+sudo ovs-vsctl set bridge br_x protocols=OpenFlow13
 
 sudo ovs-vsctl show
 ```
+
+#### Explanation
+- (x,y are custom number per device e.g. 1, 2)
+- `br_x` is the name of the switch being setup. For example `br_1`
+- `p_xy` is the port from x to y e.g. `p_12` to go from pi1 to 2
+- `<ip of br_y>` refers to the wireless ip used to reach the other device. If using batman it is the batman assigned ip. If using a wireless access point it would the ip assigned by the access point. e.g. `192.168.1.45` (not `192.168.1.45/24`)
+- options:key=100 assigns the id 100 to the network that `br_x` is going to be part of
+- ofport_request=10 uses port 10 to communicate with the other device. Both sides of the connection should use the same port but different ports for each other device.
+
 ### PROBE SCRIPT
 ```
-sudo ovs-vsctl del-port br_x probe 
+sudo ovs-vsctl del-port br_x probe
 sudo ovs-vsctl add-port br_x probe -- set Interface probe type=internal ofport_request=1
 
 sudo ip addr add 50.50.50.x/24 dev probe

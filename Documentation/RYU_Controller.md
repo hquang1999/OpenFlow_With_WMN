@@ -44,7 +44,7 @@ I recommend to install ryu from pip:
 pip install ryu
 ```
 
-You will see Ryu 4.34 in your pip freeze. However, this does not gurantee that it works. 
+You will see Ryu 4.34 in your pip freeze. However, this does not guarantee that it works. 
 
 Then you must download the [git](https://github.com/faucetsdn/ryu) for the controller and additional programs.
 
