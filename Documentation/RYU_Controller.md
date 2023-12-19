@@ -8,6 +8,8 @@ THERE IS A requirements.txt PROVIDED!!!!
 Python 3.8.10 (Above versions like 3.10 will not work!!!)
 Pip 20.0.2
 
+setuptools==44.0.0
+eventlet==0.30.2
 certifi==2023.7.22
 charset-normalizer==3.3.0
 debtcollector==2.5.0
@@ -37,6 +39,8 @@ WebOb==1.8.7
 wrapt==1.15.0
 ```
 I believe there is a wheel dependency in here but I forgot what it was. You'll have to wait for the pip install to error out to see what you need.
+
+Refer to issues 169 in the ryu github issues
 
 [Ryu Download Guide](https://ryu.readthedocs.io/en/latest/getting_started.html)
 I recommend to install ryu from pip:
