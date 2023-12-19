@@ -89,6 +89,9 @@ sudo ovs-vsctl set bridge br_x protocols=OpenFlow13
 
 sudo ovs-vsctl show
 ```
+
+ip of br_y is the B.A.T.M.A.N IP!!!
+x,y should be numbers so if you are on pi 1, use br_1
 ### PROBE SCRIPT
 ```
 sudo ovs-vsctl del-port br_x probe 
