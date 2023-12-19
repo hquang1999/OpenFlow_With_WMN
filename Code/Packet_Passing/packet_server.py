@@ -1,8 +1,9 @@
-from scapy.all import *
+import scapy.all as scapy
 
-packet = IP(dst='192.168.1.15')/ICMP()
-send(packet)
+def process_packet(packet):
+    packet.show()
 
+traffic = scapy.sniff(iface="wlp2s0", prn=process_packet, count=1)
 '''
 traffic = scapy.sniff(iface="wlp2s0", count=5)
 traffic.nsummary()
