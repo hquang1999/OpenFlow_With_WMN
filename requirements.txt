@@ -1,4 +1,5 @@
 setuptools==44.0.0
+eventlet==0.30.2
 certifi==2023.7.22
 charset-normalizer==3.3.0
 debtcollector==2.5.0
