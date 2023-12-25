@@ -26,6 +26,8 @@ Hieu: you can also read this survey to understand wireless SDN: [https://ieeexpl
 Updated [Protocol information](<https://www.open-mesh.org/projects/batman-adv/wiki/Protocol_information>)
 ## BATMAN IV
 
+Detailed explanation on OGM messages and improvements vs V3 [here](https://www.open-mesh.org/projects/batman-adv/wiki/BATMAN_IV)
+
 [Originator Messages (OGM)](https://www.open-mesh.org/projects/batman-adv/wiki/OGM)
 
 All nodes broadcast originator messages to neighbors.
@@ -38,6 +40,8 @@ All nodes broadcast originator messages to neighbors.
     - Sequence Number: Increases in time to allow for chronological ordering of new messages.
 
 ## BATMAN V
+
+changes from IV [here](https://www.open-mesh.org/projects/batman-adv/wiki/BATMAN_V)
 
 B.A.T.M.A.N. V adopts the strategy of 'divide & conquer' to handle these different uses cases better: For neighbor discovery the [Echo Location Protocol (ELP)](https://www.open-mesh.org/projects/batman-adv/wiki/ELP) is introduced. This packet type is never forwarded or rebroadcasted in the mesh. The [Originator Messages version 2 (OGMv2)](https://www.open-mesh.org/projects/batman-adv/wiki/OGMv2) protocol remains responsible for flooding the mesh with link quality information and determining the overall path transmit qualities.
 
@@ -170,13 +174,16 @@ sudo batctl if add wlan0
 
 # x = [1,2,3,4,...]
 sleep 1s
-sudo ip addr add 100.100.1.x/24 dev bat0
-sudo ifconfig set bat0 100.100.1.x/24 up
+sudo ip addr add dev bat0 100.100.1.x/24
+sudo ip link set dev bat0 up
+
+# Configure interface to apply a penalty to calculated thoroughput of 255/255 (100%) for multi-hop through this device effectively disabling multi-hop. Allows SDN more control over routing. See <https://www.open-mesh.org/projects/batman-adv/wiki/Tweaking#hop-penalty>
+sudo batctl meshif bat0 hop_penalty 255
 ```
 
 You have to make sure all the AP's are the same. It should be the cell ID you see when calling iwconfig. If not, use this command:
 ```
-sudo iwconfig wlan0 ap <AP id> 
+sudo iwconfig wlan0 ap <AP id>
 ```
 
 Checking the network:
@@ -186,6 +193,8 @@ route -n
 # ipv6 of wlan0 should match other pi's
 sudo batctl o
 ```
+
+checking controlled interfaces: `batctl if`
 
 # Reading State in Python
 To read the neighbor table use [[json.py]]
