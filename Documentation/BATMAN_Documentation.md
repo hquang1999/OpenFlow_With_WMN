@@ -149,37 +149,7 @@ Original [Reddit Article](https://www.reddit.com/r/darknetplan/comments/68s6jp/h
 ##### Make sure that the wifi is disabled
 * Make a script called batsetup.sh.
 * sudo chmod +x batsetup.sh
-* ./batsetup.sh
-```
-# Activate batman-adv
-sudo modprobe batman-adv
-
-# Remove RFKill error, check using sudo rfkill list
-sudo rfkill unblock 1
-
-# Disable and configure wlan0
-sudo ip link set wlan0 down
-sudo iwconfig wlan0 mode ad-hoc
-sudo iwconfig wlan0 essid my-mesh-network
-sudo iwconfig wlan0 ap any
-sudo iwconfig wlan0 channel 8
-sleep 1s
-sudo ip link set wlan0 up
-
-# Setup batman
-sleep 1s
-# FOR BATMAN VERSIONS
-# sudo batctl ra BATMAN_V
-sudo batctl if add wlan0
-
-# x = [1,2,3,4,...]
-sleep 1s
-sudo ip addr add dev bat0 100.100.1.x/24
-sudo ip link set dev bat0 up
-
-# Configure interface to apply a penalty to calculated thoroughput of 255/255 (100%) for multi-hop through this device effectively disabling multi-hop. Allows SDN more control over routing. See <https://www.open-mesh.org/projects/batman-adv/wiki/Tweaking#hop-penalty>
-sudo batctl meshif bat0 hop_penalty 255
-```
+* [./batsetup.sh](../Scripts/batsetup.sh)
 
 You have to make sure all the AP's are the same. It should be the cell ID you see when calling iwconfig. If not, use this command:
 ```

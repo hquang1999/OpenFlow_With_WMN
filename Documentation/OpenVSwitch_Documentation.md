@@ -77,19 +77,7 @@ sudo reboot
 ```
 
 ### FULL SCRIPT
-```
-sudo ovs-vsctl del-br br_x
-sudo ovs-vsctl add-br br_x
-
-sudo ovs-vsctl add-port br_x p_xy -- set interface p_xy type=vxlan options:remote_ip=<ip of br_y> options:key=100 ofport_request=10
-
-sudo ovs-vsctl set-controller br_x tcp:<controller ip>:6653
-
-sudo ovs-vsctl set bridge br_x protocols=OpenFlow13
-
-sudo ovs-vsctl show
-```
-
+[./openvswitch_setup.sh](../Scripts/openvswitch_setup.sh)
 #### Explanation
 - (x,y are custom number per device e.g. 1, 2)
 - `br_x` is the name of the switch being setup. For example `br_1`
@@ -98,16 +86,6 @@ sudo ovs-vsctl show
 - options:key=100 assigns the id 100 to the network that `br_x` is going to be part of
 - ofport_request=10 uses port 10 to communicate with the other device. Both sides of the connection should use the same port but different ports for each other device.
 
-### PROBE SCRIPT
-```
-sudo ovs-vsctl del-port br_x probe
-sudo ovs-vsctl add-port br_x probe -- set Interface probe type=internal ofport_request=1
-
-sudo ip addr add 50.50.50.x/24 dev probe
-sudo ifconfig probe 50.50.50.x/24 mtu 1400 up
-
-sudo ovs-vsctl show
-```
 #### Connecting Host to Bridge
 
 OpenVSwitch is designed to connect virtual machines together across networks. It acts as an overlay switch/network. What we do is create a switch that will connect the VM or for this case, a simple tap port, to itself and establish a vxlan connection to the pi across the network. 
