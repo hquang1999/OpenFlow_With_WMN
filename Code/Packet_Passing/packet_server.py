@@ -1,9 +1,12 @@
 import socket as sck
 import threading
 
+FORMAT = 'utf-8'
+HEADER = 64
 PORT = 5500
 SERVER_IP = "192.168.1.113"
 ADDR = (SERVER_IP, PORT)
+DISCONNECT_MSG = "!!!DISCONNECT!!!"
 
 # Creates the socket
 server = sck.socket(sck.AF_INET, sck.SOCK_STREAM)
@@ -12,10 +15,24 @@ server.bind(ADDR)
 
 # Individual connection handler
 def client_handler(connected_obj, address):
-    pass
+    print(f"[New Connection] {address} connected!")
+    connected = True
+    while connected:
+        # Padding the packet to make sure that it fits?
+        msg_length = connected_obj.recv(HEADER).decode(FORMAT)
+        msg_length = int(msg_length)
+        msg = connected_obj.recv(msg_length).decode(FORMAT)
 
+        # Disconnect handler
+        if msg == DISCONNECT_MSG:
+            connected = False
+
+        print(f"[{address}] {msg}")
+
+    connected_obj.close()
 def server_side_handler():
     server.listen()
+    print(f"[Listening] Server is listening on {SERVER_IP}")
     while True:
         # This line is waiting for a new connection to the server
         # (object, IP and port)
