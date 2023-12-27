@@ -32,6 +32,8 @@ def client_handler(connected_obj, address):
                 connected = False
 
             print(f"[{address}] {msg}")
+            # Sending back to client
+            connected_obj.send("Message received".encode(FORMAT))
 
     connected_obj.close()
 

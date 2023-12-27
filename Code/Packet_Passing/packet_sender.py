@@ -23,6 +23,7 @@ def send_handler(msg):
     send_length += b' ' * (HEADER - len(send_length))
     client_socket.send(send_length)
     client_socket.send(message)
+    print(client_socket.recv(HEADER))
 
 send_handler("Hello World!")
 send_handler(DISCONNECT_MSG)
