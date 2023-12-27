@@ -9,7 +9,7 @@ PORT = 5500
 SERVER_IP = "192.168.1.113"
 ADDR = (SERVER_IP, PORT)
 
-# Creates the socket
+# Creates the server socket
 server_socket = sck.socket(sck.AF_INET, sck.SOCK_STREAM)
 # Binds the socket to the ip and port #
 server_socket.bind(ADDR)
