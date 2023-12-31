@@ -1,10 +1,13 @@
+# when creating environment use
+# `micromamba create -n ryu pip==20.0.2 python==3.8.10 setuptools==44.0.0`
+# `micromamba activate ryu`
+# `pip install -r requirements.txt`
 setuptools==44.0.0
 eventlet==0.30.2
 certifi==2023.7.22
 charset-normalizer==3.3.0
 debtcollector==2.5.0
 dnspython==1.16.0
-eventlet==0.31.1
 greenlet==3.0.0
 idna==3.4
 msgpack==1.0.7

@@ -29,7 +29,7 @@ sudo ovs-vsctl add-br <br_x>
 
 #### Create Port (VTEP)
 ```
-sudo ovs-vsctl add-port <br_x> <port_x> -- set Interface <port_x> type=[type] options:remote_ip=<remote_ip> options:keys=flow 
+sudo ovs-vsctl add-port <br_x> <port_x> -- set Interface <port_x> type=[type] options:remote_ip=<remote_ip> options:keys=flow
 ```
 ##### \[type\]
 * internal: inside of the switch.
@@ -38,7 +38,7 @@ sudo ovs-vsctl add-port <br_x> <port_x> -- set Interface <port_x> type=[type] op
 
 You can set the interface individually without add-port:
 ```
-sudo ovs-vsctl set Interface <port_x> type=[type] options:remote_ip=<remote_ip> options:keys=flow 
+sudo ovs-vsctl set Interface <port_x> type=[type] options:remote_ip=<remote_ip> options:keys=flow
 ```
 
 #### Connect to Controller
@@ -85,12 +85,13 @@ sudo reboot
 - `<ip of br_y>` refers to the wireless ip used to reach the other device. If using batman it is the batman assigned ip. If using a wireless access point it would the ip assigned by the access point. e.g. `192.168.1.45` (not `192.168.1.45/24`)
 - options:key=100 assigns the id 100 to the network that `br_x` is going to be part of
 - ofport_request=10 uses port 10 to communicate with the other device. Both sides of the connection should use the same port but different ports for each other device.
+- `stp_enable=true` enables the [spanning tree protocol](https://en.wikipedia.org/wiki/Spanning_Tree_Protocol) because layer 2 networks don't support [switching loops](https://en.wikipedia.org/wiki/Switching_loop)
 
 #### Connecting Host to Bridge
 
-OpenVSwitch is designed to connect virtual machines together across networks. It acts as an overlay switch/network. What we do is create a switch that will connect the VM or for this case, a simple tap port, to itself and establish a vxlan connection to the pi across the network. 
+OpenVSwitch is designed to connect virtual machines together across networks. It acts as an overlay switch/network. What we do is create a switch that will connect the VM or for this case, a simple tap port, to itself and establish a vxlan connection to the pi across the network.
 
-What VxLAN does is that it map's the tap port's ip with the underlying network ip, then it encapsulates the tap port's packets with the underlying network, essentially making that packet an underlying network packet. For this case, the underlying network will be B.A.T.M.A.N. The packet will be pushed to the other side where it exits the destination's VTEP, gets de-capsulated, then pushed up to the destination tap port. 
+What VxLAN does is that it map's the tap port's ip with the underlying network ip, then it encapsulates the tap port's packets with the underlying network, essentially making that packet an underlying network packet. For this case, the underlying network will be B.A.T.M.A.N. The packet will be pushed to the other side where it exits the destination's VTEP, gets de-capsulated, then pushed up to the destination tap port.
 
 ![](images/vxlan_encap.png)
 
@@ -122,9 +123,9 @@ sudo ovs-ofctl -O OpenFlowV <setting> br_x
 ```
 * OpenFlowV = OpenFlow versions, ie OpenFlow13
 * \<setting\> are the settings provided by the manual
-* br_x is the controller / bridge 
+* br_x is the controller / bridge
 
-#### Flow Entry 
+#### Flow Entry
 ```
 // ---- This one is the output flow ---- //
 table=0,priority=1,in_port=1,ip,nw_src=50.50.50.1,nw_dst=50.50.50.2,actions=output:10
@@ -134,4 +135,4 @@ table=0,priority=1,in_port=10,ip,nw_src=50.50.50.2,nw_dst=50.50.50.1,actions=out
 table=0,priority=0,actions=CONTROLLER:65535
 ```
 
-10 is your vtep (p_21 as an example) port. 1 is your probe port. 
+10 is your vtep (p_21 as an example) port. 1 is your probe port.

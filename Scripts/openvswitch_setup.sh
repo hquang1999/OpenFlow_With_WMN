@@ -21,7 +21,7 @@ done
 sudo ovs-vsctl set-controller $openvswitch_bridge_name tcp:${controller_ip}:6653
 
 # Set protocol
-sudo ovs-vsctl set bridge $openvswitch_bridge_name protocols=OpenFlow13
+sudo ovs-vsctl set bridge $openvswitch_bridge_name protocols=OpenFlow13 stp_enable=true
 
 # --- Setup probe network VM on configured openvswitch ---
 
