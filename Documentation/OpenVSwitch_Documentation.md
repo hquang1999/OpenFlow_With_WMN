@@ -86,6 +86,7 @@ sudo reboot
 - options:key=100 assigns the id 100 to the network that `br_x` is going to be part of
 - ofport_request=10 uses port 10 to communicate with the other device. Both sides of the connection should use the same port but different ports for each other device.
 - `stp_enable=true` enables the [spanning tree protocol](https://en.wikipedia.org/wiki/Spanning_Tree_Protocol) because layer 2 networks don't support [switching loops](https://en.wikipedia.org/wiki/Switching_loop)
+  - the port states (blocked, forwarding, etc) can be viewed with `sudo ovs-appctl stp/show`
 
 #### Connecting Host to Bridge
 
