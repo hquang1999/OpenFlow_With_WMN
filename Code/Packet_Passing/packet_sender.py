@@ -1,6 +1,6 @@
 import socket as sck
 import json
-from ..OpenFlow.totalSwitches import OVSSwitches
+from Code.OpenFlow.totalSwitches import OVSSwitches
 
 FORMAT = 'utf-8'
 HEADER = 64
@@ -35,4 +35,5 @@ def send_json_handler(data):
 #send_handler(DISCONNECT_MSG)
 test_switch = OVSSwitches()
 
+print(test_switch.ReturnSwitches())
 
