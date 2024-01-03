@@ -1,5 +1,7 @@
 import socket as sck
-from Code import 
+import json
+from ..OpenFlow import totalSwitches
+from ..OpenFlow import pushFlows
 
 FORMAT = 'utf-8'
 HEADER = 64
