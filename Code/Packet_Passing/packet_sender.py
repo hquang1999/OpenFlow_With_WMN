@@ -1,7 +1,8 @@
 import socket as sck
 import json
 import sys
-sys.path.append('OpenFlow_With_WMN/Code/OpenFlow')
+sys.path.append('/home/hqbuntu/OpenFlow_With_WMN/Code/OpenFlow')
+from Code.OpenFlow.totalSwitches import OVSSwitches
 
 print(sys.path)
 
