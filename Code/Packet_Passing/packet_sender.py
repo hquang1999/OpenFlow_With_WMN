@@ -1,10 +1,9 @@
 import socket as sck
 import json
 import sys
-
-sys.path.append('/home/hqbuntu/OpenFlow_With_WMN/Code')
-print(sys.path)
-from Code.OpenFlow.totalSwitches import OVSSwitches
+# Put the path of the file you are using
+#sys.path.append('/home/hqbuntu/OpenFlow_With_WMN/Code')
+from ..OpenFlow_With_WMN.Code.OpenFlow.totalSwitches import OVSSwitches
 
 FORMAT = 'utf-8'
 HEADER = 64
@@ -41,6 +40,6 @@ def send_json_handler(data):
 '''
 # send_handler("Hello World!")
 # send_handler(DISCONNECT_MSG)
-# test_switch = OVSSwitches()
+test_switch = OVSSwitches()
 
-# print(test_switch.ReturnSwitches())
+print(test_switch.ReturnSwitches())
