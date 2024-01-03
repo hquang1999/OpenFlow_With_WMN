@@ -31,9 +31,8 @@ def send_json_handler(data):
     json_msg = json.dumps(data)
     send_handler(json_msg)
 
-send_handler("Hello World!")
+#send_handler("Hello World!")
+#send_handler(DISCONNECT_MSG)
 test_switch = OVSSwitches()
 
 
-# Example of sending a JSON message
-send_handler(DISCONNECT_MSG)
