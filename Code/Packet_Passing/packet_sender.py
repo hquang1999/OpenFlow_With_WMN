@@ -1,5 +1,7 @@
 import socket as sck
 import json
+import sys
+sys.path.append('OpenFlow_With_WMN')
 from Code.OpenFlow.totalSwitches import OVSSwitches
 
 FORMAT = 'utf-8'
