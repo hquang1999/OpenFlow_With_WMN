@@ -1,10 +1,10 @@
 import socket as sck
 import json
 import sys
-sys.path.append('/home/hqbuntu/OpenFlow_With_WMN/Code/OpenFlow')
-from Code.OpenFlow.totalSwitches import OVSSwitches
 
+sys.path.append('/home/hqbuntu/OpenFlow_With_WMN/Code')
 print(sys.path)
+from Code.OpenFlow.totalSwitches import OVSSwitches
 
 FORMAT = 'utf-8'
 HEADER = 64
@@ -14,10 +14,12 @@ PORT = 5500
 SERVER_IP = "192.168.1.113"
 ADDR = (SERVER_IP, PORT)
 
-# Connect to the server
-#client_socket = sck.socket(sck.AF_INET, sck.SOCK_STREAM)
-#client_socket.connect(ADDR)
 
+# Connect to the server
+# client_socket = sck.socket(sck.AF_INET, sck.SOCK_STREAM)
+# client_socket.connect(ADDR)
+
+'''
 def send_handler(msg):
     # Encode into bytes sized object
     message = msg.encode(FORMAT)
@@ -30,14 +32,15 @@ def send_handler(msg):
     client_socket.send(send_length)
     client_socket.send(message)
     print(client_socket.recv(HEADER).decode(FORMAT))
+
+
 def send_json_handler(data):
     # Convert the Python dictionary to a JSON-formatted string
     json_msg = json.dumps(data)
     send_handler(json_msg)
+'''
+# send_handler("Hello World!")
+# send_handler(DISCONNECT_MSG)
+# test_switch = OVSSwitches()
 
-#send_handler("Hello World!")
-#send_handler(DISCONNECT_MSG)
-#test_switch = OVSSwitches()
-
-#print(test_switch.ReturnSwitches())
-
+# print(test_switch.ReturnSwitches())
