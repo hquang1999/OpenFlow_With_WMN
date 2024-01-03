@@ -1,7 +1,6 @@
 import socket as sck
 import json
-from ..OpenFlow import totalSwitches
-from ..OpenFlow import pushFlows
+from ..OpenFlow.totalSwitches import OVSSwitches
 
 FORMAT = 'utf-8'
 HEADER = 64
@@ -27,15 +26,14 @@ def send_handler(msg):
     client_socket.send(send_length)
     client_socket.send(message)
     print(client_socket.recv(HEADER).decode(FORMAT))
-
-send_handler("Hello World!")
-
 def send_json_handler(data):
     # Convert the Python dictionary to a JSON-formatted string
     json_msg = json.dumps(data)
     send_handler(json_msg)
 
+send_handler("Hello World!")
+test_switch = OVSSwitches()
+
+
 # Example of sending a JSON message
-json_data = {"key": "value", "number": 42}
-send_json_handler(json_data)
 send_handler(DISCONNECT_MSG)
