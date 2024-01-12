@@ -19,7 +19,7 @@ self_CIDR=
 wireless_interface=wlan0
 network_name=my-mesh-network
 network_channel=8
-batman_algo=BATMAN_IV # BATMAN_IV or BATMAN_V
+batman_algo=BATMAN_V # BATMAN_IV or BATMAN_V
 
 # --- Openvswitch config ---
 
