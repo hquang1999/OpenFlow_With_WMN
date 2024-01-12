@@ -2,7 +2,7 @@ import socket as sck
 import threading
 
 FORMAT = 'utf-8'
-HEADER = 64
+HEADER = 128
 DISCONNECT_MSG = "!!!DISCONNECT!!!"
 PORT = 5500
 # ADJUST THE SERVER IP

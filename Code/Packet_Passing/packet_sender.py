@@ -1,27 +1,24 @@
 import socket as sck
 import json
-import sys
-# Put the path of the file you are using
-#sys.path.append('/home/hqbuntu/OpenFlow_With_WMN/Code')
-from ..OpenFlow import totalSwitches
+import time
+from pushFlows import PushFlow
 
 FORMAT = 'utf-8'
-HEADER = 64
+HEADER = 128
 DISCONNECT_MSG = "!!!DISCONNECT!!!"
 PORT = 5500
 # ADJUST THE SERVER IP
 SERVER_IP = "192.168.1.113"
 ADDR = (SERVER_IP, PORT)
 
-
 # Connect to the server
-# client_socket = sck.socket(sck.AF_INET, sck.SOCK_STREAM)
-# client_socket.connect(ADDR)
+client_socket = sck.socket(sck.AF_INET, sck.SOCK_STREAM)
+client_socket.connect(ADDR)
 
-'''
-def send_handler(msg):
+def send_json_handler(msg):
     # Encode into bytes sized object
-    message = msg.encode(FORMAT)
+    json_msg = json.dumps(msg)
+    message = json_msg.encode(FORMAT)
     # Gets the message length
     msg_length = len(message)
     send_length = str(msg_length).encode(FORMAT)
@@ -30,16 +27,17 @@ def send_handler(msg):
     send_length += b' ' * (HEADER - len(send_length))
     client_socket.send(send_length)
     client_socket.send(message)
+    # Response message for received
     print(client_socket.recv(HEADER).decode(FORMAT))
 
+def send_interval(sec):
+    while True:
+        test_switch = PushFlow()
+        sendMe = test_switch.GetBridgeAll(0)
+        orgIP = '100.100.100.10'
 
-def send_json_handler(data):
-    # Convert the Python dictionary to a JSON-formatted string
-    json_msg = json.dumps(data)
-    send_handler(json_msg)
-'''
-# send_handler("Hello World!")
-# send_handler(DISCONNECT_MSG)
-#test_switch = OVSSwitches()
+        sendMe = [{**entry, 'origin': orgIP} for entry in sendMe]
+        send_json_handler(sendMe)
+        time.sleep(sec)
 
-#print(test_switch.ReturnSwitches())
+send_interval(2)
