@@ -1,22 +1,27 @@
 from __future__ import annotations
 from typing import Optional
+
 class Edge:
     """
     Data associated with the edges of the graph
     """
+
     cost: float
     max_flow: float
     def __new__(cls, cost: float, max_flow: float) -> Edge: ...
     def __repr__(self) -> str: ...
+
 class FlowPath:
     """
     Path through the graph with a cost and flow
     """
+
     cost: float
     flow: float
     edges: list[int]
     def __new__(cls, cost: float, flow: float, edges: list[int]) -> FlowPath: ...
     def __repr__(self) -> str: ...
+
 class Graph:
     """
     Python wrapper of Rust Graph type.
@@ -38,6 +43,13 @@ class Graph:
     def remove_edge(self, a: int) -> Optional[Edge]:
         """
         Remove edge from graph. Return the removed edge's data.
+        """
+    def edges_directed(self, a: int, outgoing: bool) -> list[int]:
+        """
+        All edges of a, in the specified direction.
+
+        - Outgoing=true: All edges from a.
+        - Outgoing=false: All edges to a.
         """
     def ranked_max_flow(self, source: int, goal: int) -> list[FlowPath]:
         """

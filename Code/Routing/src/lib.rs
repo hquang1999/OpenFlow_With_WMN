@@ -117,6 +117,21 @@ impl Graph {
     fn add_edge(&mut self, a: NodeId, b: NodeId, weight: Edge) -> EdgeId {
         self.0.add_edge(a.into(), b.into(), weight).index()
     }
+    /// All edges of a, in the specified direction.
+    ///
+    /// - Outgoing=true: All edges from a.
+    /// - Outgoing=false: All edges to a.
+    fn edges_directed(&self, a: NodeId, outgoing: bool) -> Vec<EdgeId> {
+        let dir = if outgoing {
+            petgraph::Direction::Outgoing
+        } else {
+            petgraph::Direction::Incoming
+        };
+        self.0
+            .edges_directed(a.into(), dir)
+            .map(|x| x.id().index())
+            .collect()
+    }
     /// Finds multiple `FlowPath`s going from `source` to `goal` sorted from lowest cost to highest cost.
     /// The combination of these paths is a minimum cost maximum flow from `source` to `goal`
     fn ranked_max_flow(&self, source: NodeId, goal: NodeId) -> Vec<FlowPath> {
