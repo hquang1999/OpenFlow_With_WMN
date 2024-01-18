@@ -123,7 +123,8 @@ You will need to use this command to print OpenFlow descriptions based on the ma
 sudo ovs-ofctl -O OpenFlowV <setting> br_x
 ```
 * OpenFlowV = OpenFlow versions, ie OpenFlow13
-* \<setting\> are the settings provided by the manual
+* \<setting\> are the settings provided by the manpage for [`ovs-ofctl`](https://manpages.debian.org/testing/openvswitch-common/ovs-ofctl.8.en.html) with fields at manpage for [`ovs-fields`](https://manpages.debian.org/testing/openvswitch-common/ovs-fields.7.en.html)
+  * may need `--strict` to use `ovs-ofctl del-flows` on some fields like `priority`
 * br_x is the controller / bridge
 
 #### Flow Entry
