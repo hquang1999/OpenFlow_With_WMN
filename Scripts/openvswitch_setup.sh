@@ -4,7 +4,7 @@
 source ./config.sh
 
 # Delete the bridge if it has already been created.
-sudo ovs-vsctl del-br $openvswitch_bridge_name 2>/dev/null
+sudo ovs-vsctl --if-exists del-br $openvswitch_bridge_name 2>/dev/null
 # Create the bridge
 sudo ovs-vsctl add-br $openvswitch_bridge_name
 
