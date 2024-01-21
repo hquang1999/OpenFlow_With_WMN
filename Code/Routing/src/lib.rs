@@ -67,7 +67,7 @@ impl FlowPath {
 /// Python wrapper of Rust Graph type.
 #[pyclass]
 #[derive(Debug, Clone, Default)]
-struct Graph(pub petgraph::stable_graph::StableGraph<(), Edge, Directed, usize>);
+struct Graph(pub petgraph::stable_graph::StableGraph<PyObject, Edge, Directed, usize>);
 
 /// Marker for nodes explored during bfs.
 /// Order is reversed for use in a BinaryHeap to make a min-heap and sorted only according to cost.
@@ -102,20 +102,25 @@ impl Graph {
         format!("{:#?}", self.0)
     }
     /// Add node to graph and return its id.
-    fn add_node(&mut self) -> NodeId {
-        self.0.add_node(()).index()
+    fn add_node(&mut self, val: PyObject) -> NodeId {
+        self.0.add_node(val).index()
+    }
+    /// Get node with the given node id
+    fn get_node(&self, id: NodeId) -> Option<PyObject> {
+        // Clone shared pointer `Py<...>`
+        self.0.node_weight(id.into()).cloned()
     }
     /// Remove node from graph
     fn remove_node(&mut self, a: NodeId) {
         self.0.remove_node(a.into());
     }
-    /// Remove edge from graph. Return the removed edge's data.
-    fn remove_edge(&mut self, a: EdgeId) -> Option<Edge> {
-        self.0.remove_edge(a.into())
-    }
     /// Add edge from `a` to `b` to graph with associated data `weight` and return its id.
     fn add_edge(&mut self, a: NodeId, b: NodeId, weight: Edge) -> EdgeId {
         self.0.add_edge(a.into(), b.into(), weight).index()
+    }
+    /// Remove edge from graph. Return the removed edge's data.
+    fn remove_edge(&mut self, a: EdgeId) -> Option<Edge> {
+        self.0.remove_edge(a.into())
     }
     /// All edges of a, in the specified direction.
     ///
@@ -142,8 +147,8 @@ impl Graph {
 /// Finds multiple `FlowPath`s going from `source` to `goal` sorted from lowest cost to highest cost.
 /// The combination of these paths is a minimum cost maximum flow from `source` to `goal`
 // This is the recursive rust impl that is forwarded to by the python method.
-fn ranked_max_flow(
-    mut graph: petgraph::stable_graph::StableGraph<(), Edge, Directed, usize>,
+fn ranked_max_flow<N>(
+    mut graph: petgraph::stable_graph::StableGraph<N, Edge, Directed, usize>,
     source: NodeIndex<NodeId>,
     goal: NodeIndex<NodeId>,
 ) -> Vec<FlowPath> {
@@ -265,10 +270,10 @@ mod tests {
 
     #[test]
     fn test_1() {
-        let mut graph = Graph::__new__();
-        let n1 = graph.add_node();
-        let n2 = graph.add_node();
-        let n3 = graph.add_node();
+        let mut graph = petgraph::stable_graph::StableGraph::<(), Edge, Directed, usize>::default();
+        let n1 = graph.add_node(());
+        let n2 = graph.add_node(());
+        let n3 = graph.add_node(());
         let _ = graph.add_edge(
             n2,
             n1,
@@ -277,24 +282,28 @@ mod tests {
                 max_flow: 1000.,
             },
         );
-        let e1 = graph.add_edge(
-            n1,
-            n2,
-            Edge {
-                cost: 1.,
-                max_flow: 1.,
-            },
-        );
-        let e2 = graph.add_edge(
-            n1,
-            n2,
-            Edge {
-                cost: 1.,
-                max_flow: 1.,
-            },
-        );
+        let e1 = graph
+            .add_edge(
+                n1,
+                n2,
+                Edge {
+                    cost: 1.,
+                    max_flow: 1.,
+                },
+            )
+            .index();
+        let e2 = graph
+            .add_edge(
+                n1,
+                n2,
+                Edge {
+                    cost: 1.,
+                    max_flow: 1.,
+                },
+            )
+            .index();
         assert_eq!(
-            graph.ranked_max_flow(n1, n2),
+            ranked_max_flow(graph.clone(), n1, n2),
             vec![
                 FlowPath {
                     flow: 1.,
@@ -308,32 +317,36 @@ mod tests {
                 }
             ]
         );
-        let e3 = graph.add_edge(
-            n2,
-            n3,
-            Edge {
-                cost: 2.,
-                max_flow: 0.5,
-            },
-        );
+        let e3 = graph
+            .add_edge(
+                n2,
+                n3,
+                Edge {
+                    cost: 2.,
+                    max_flow: 0.5,
+                },
+            )
+            .index();
         assert_eq!(
-            graph.ranked_max_flow(n1, n3),
+            ranked_max_flow(graph.clone(), n1, n3),
             vec![FlowPath {
                 flow: 0.5,
                 cost: 3.,
                 edges: vec![e2, e3]
             }]
         );
-        let e4 = graph.add_edge(
-            n1,
-            n3,
-            Edge {
-                cost: 10.,
-                max_flow: 10.,
-            },
-        );
+        let e4 = graph
+            .add_edge(
+                n1,
+                n3,
+                Edge {
+                    cost: 10.,
+                    max_flow: 10.,
+                },
+            )
+            .index();
         assert_eq!(
-            graph.ranked_max_flow(n1, n3),
+            ranked_max_flow(graph, n1, n3),
             vec![
                 FlowPath {
                     flow: 0.5,
