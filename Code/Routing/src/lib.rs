@@ -171,6 +171,18 @@ fn ranked_max_flow<N>(
     source: NodeIndex<NodeId>,
     goal: NodeIndex<NodeId>,
 ) -> Vec<FlowPath> {
+    // If source and goal are same, shortcut whole algorithm to only edges connecting the source to itself.
+    if source == goal {
+        return graph
+            .edges_connecting(source, source)
+            .map(|edge| FlowPath {
+                cost: edge.weight().cost,
+                flow: edge.weight().max_flow,
+                edges: vec![edge.id().index()],
+            })
+            .collect();
+    }
+
     // Mostly a bfs.
     // Difference is that once the destination is found, the edge with the lowest min_flow on the path is subtracted from the path all edges on the path...
     // ... then repeat searching until the destination can't be reached.
