@@ -114,6 +114,15 @@ impl Graph {
     fn remove_node(&mut self, a: NodeId) {
         self.0.remove_node(a.into());
     }
+    /// Get `Nodeid`s in the `Graph`
+    fn node_indices(&self) -> Vec<NodeId> {
+        self.0.node_indices().map(|x| x.index()).collect()
+    }
+    /// Node weights in the `Graph`
+    fn node_weights(&self) -> Vec<PyObject> {
+        // Clone shared pointer `Py<...>`
+        self.0.node_weights().cloned().collect()
+    }
     /// Add edge from `a` to `b` to graph with associated data `weight` and return its id.
     fn add_edge(&mut self, a: NodeId, b: NodeId, weight: Edge) -> EdgeId {
         self.0.add_edge(a.into(), b.into(), weight).index()
@@ -121,6 +130,16 @@ impl Graph {
     /// Remove edge from graph. Return the removed edge's data.
     fn remove_edge(&mut self, a: EdgeId) -> Option<Edge> {
         self.0.remove_edge(a.into())
+    }
+    /// Edge ids in the `Graph`
+    fn edge_indices(&self) -> Vec<EdgeId> {
+        self.0.edge_indices().map(|x| x.index()).collect()
+    }
+    /// `(Start, End)` nodes of the given edge
+    fn edge_endpoints(&self, id: EdgeId) -> Option<(NodeId, NodeId)> {
+        self.0
+            .edge_endpoints(id.into())
+            .map(|(x, y)| (x.index(), y.index()))
     }
     /// All edges of a, in the specified direction.
     ///

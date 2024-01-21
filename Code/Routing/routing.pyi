@@ -33,10 +33,18 @@ class Graph:
         """Get node with the given node id"""
     def remove_node(self, a: NodeId):
         """Remove node from graph."""
+    def node_indices(self) -> list[NodeId]:
+        """Get `Nodeid`s that in the `Graph`"""
+    def node_weights(self) -> list[Any]:
+        """Node weights in the `Graph`"""
     def add_edge(self, a: NodeId, b: NodeId, weight: Edge) -> EdgeId:
         """Add edge from `a` to `b` to graph with associated data `weight` and return its id."""
     def remove_edge(self, a: EdgeId) -> Optional[Edge]:
         """Remove edge from graph. Return the removed edge's data."""
+    def edge_indices(self) -> list[EdgeId]:
+        """Edge ids in the `Graph`"""
+    def edge_endpoints(self, id: EdgeId) -> Optional[tuple[NodeId, NodeId]]:
+        """`(Start, End)` nodes of the given edge"""
     def edges_directed(self, a: NodeId, outgoing: bool) -> list[EdgeId]:
         """
         All edges of a, in the specified direction.

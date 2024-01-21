@@ -34,3 +34,10 @@ path.edges = [e2, e3]
 assert graph.ranked_max_flow(n2, n4) == [path]
 paths = [FlowPath(8, 10, [e4]), FlowPath(3 + 123 + 0.1, 4, [e1, e2, e3])]
 assert graph.ranked_max_flow(n1, n4) == paths
+print(graph.node_indices())
+assert graph.node_indices() == [n1, n2, n3, n4]
+assert graph.node_weights() == list(
+    map(lambda x: graph.get_node(x), graph.node_indices())
+)
+assert graph.edge_indices() == [e1, e2, e3, e4]
+assert graph.edge_endpoints(e3) == (n3, n4)
