@@ -31,8 +31,8 @@ class Graph:
         """Add node to graph and return its id."""
     def get_node(self, id: NodeId) -> Optional[Any]:
         """Get node with the given node id"""
-    def remove_node(self, a: NodeId):
-        """Remove node from graph."""
+    def remove_node(self, a: NodeId) -> Optional[Any]:
+        """Remove node from graph, if it exists, and return its weight."""
     def node_indices(self) -> list[NodeId]:
         """Get `Nodeid`s that in the `Graph`"""
     def node_weights(self) -> list[Any]:
@@ -57,3 +57,5 @@ class Graph:
         Finds multiple `FlowPath`s going from `source` to `goal` sorted from lowest cost to highest cost.
         The combination of these paths is a minimum cost maximum flow from `source` to `goal`
         """
+    def save_dot(self, path: str) -> None:
+        """Save graph with DOT file syntax. This file can be viewed with a GRAPHVIZ editor."""

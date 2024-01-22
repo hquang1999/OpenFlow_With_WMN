@@ -41,3 +41,4 @@ assert graph.node_weights() == list(
 )
 assert graph.edge_indices() == [e1, e2, e3, e4]
 assert graph.edge_endpoints(e3) == (n3, n4)
+graph.save_dot("out.dot")

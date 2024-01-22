@@ -4,7 +4,7 @@ use petgraph::{
     visit::{EdgeRef, VisitMap, Visitable},
     Directed,
 };
-use pyo3::{prelude::*, pyclass::CompareOp};
+use pyo3::{exceptions::PyIOError, prelude::*, pyclass::CompareOp};
 use std::{
     cmp::Reverse,
     collections::{
@@ -110,9 +110,9 @@ impl Graph {
         // Clone shared pointer `Py<...>`
         self.0.node_weight(id.into()).cloned()
     }
-    /// Remove node from graph
-    fn remove_node(&mut self, a: NodeId) {
-        self.0.remove_node(a.into());
+    /// Remove node from graph, if it exists, and return its weight.
+    fn remove_node(&mut self, a: NodeId) -> Option<PyObject> {
+        self.0.remove_node(a.into())
     }
     /// Get `Nodeid`s in the `Graph`
     fn node_indices(&self) -> Vec<NodeId> {
@@ -160,6 +160,17 @@ impl Graph {
     /// The combination of these paths is a minimum cost maximum flow from `source` to `goal`
     fn ranked_max_flow(&self, source: NodeId, goal: NodeId) -> Vec<FlowPath> {
         ranked_max_flow(self.0.clone(), source.into(), goal.into())
+    }
+    /// Save graph with DOT file syntax. This file can be viewed with a GRAPHVIZ editor.
+    fn save_dot(&self, path: std::path::PathBuf) -> PyResult<()> {
+        use std::io::Write;
+        let mut f = std::fs::File::create(path).unwrap();
+        write!(
+            f,
+            "{:#?}",
+            petgraph::dot::Dot::with_config(&self.0, &[petgraph::dot::Config::NodeIndexLabel])
+        )
+        .map_err(|e| PyIOError::new_err(e))
     }
 }
 
