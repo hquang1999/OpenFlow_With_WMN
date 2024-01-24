@@ -4,7 +4,7 @@ use petgraph::{
     visit::{EdgeRef, VisitMap, Visitable},
     Directed,
 };
-use pyo3::{exceptions::PyIOError, prelude::*, pyclass::CompareOp};
+use pyo3::{prelude::*, pyclass::CompareOp};
 use std::{
     cmp::Reverse,
     collections::{
@@ -164,13 +164,13 @@ impl Graph {
     /// Save graph with DOT file syntax. This file can be viewed with a GRAPHVIZ editor.
     fn save_dot(&self, path: std::path::PathBuf) -> PyResult<()> {
         use std::io::Write;
-        let mut f = std::fs::File::create(path).unwrap();
+        let mut f = std::fs::File::create(path)?;
         write!(
             f,
             "{:#?}",
             petgraph::dot::Dot::with_config(&self.0, &[petgraph::dot::Config::NodeIndexLabel])
-        )
-        .map_err(|e| PyIOError::new_err(e))
+        )?;
+        Ok(())
     }
 }
 
