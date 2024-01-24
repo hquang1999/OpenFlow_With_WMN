@@ -1,4 +1,5 @@
-from routing import routing, FlowPath, Graph, Edge
+from operator import attrgetter
+from routing import routing, FlowPath, Graph, Edge  # type: ignore
 
 
 # force pass by reference
@@ -42,3 +43,5 @@ assert graph.node_weights() == list(
 assert graph.edge_indices() == [e1, e2, e3, e4]
 assert graph.edge_endpoints(e3) == (n3, n4)
 graph.save_dot("out.dot")
+# sort by flow instead of cost
+print(sorted(graph.ranked_max_flow(n1, n4), key=attrgetter("flow")))
