@@ -4,10 +4,10 @@ import threading
 FORMAT = 'utf-8'
 HEADER = 128
 DISCONNECT_MSG = "!!!DISCONNECT!!!"
-PORT = 5500
+PORT = 67
 # ADJUST THE SERVER IP
 SERVER_IP = "192.168.1.113"
-ADDR = (SERVER_IP, PORT)
+ADDR = ('', PORT)
 
 # Creates the server socket
 server_socket = sck.socket(sck.AF_INET, sck.SOCK_STREAM)

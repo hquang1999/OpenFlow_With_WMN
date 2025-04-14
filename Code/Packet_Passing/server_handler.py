@@ -29,19 +29,16 @@ def UDPGiveSourceIP():
     udp_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
     udp_socket.bind(('', udp_port))
 
-    udp_socket.settimeout(1)
+
     print("Server listening for broadcasts on port", udp_port)
 
     thread = None
     while time.time() < t_end:
-        try:
-            data, addr = udp_socket.recvfrom(1024)
-            thread = threading.Thread(target=UDPGiverHandler,
-                                      args=(udp_socket, addr))
-            thread.start()
-            print(f"[Active Connection] {threading.activeCount() - 1}")
-        except socket.timeout:
-            continue
+        data, addr = udp_socket.recvfrom(1024)
+        thread = threading.Thread(target=UDPGiverHandler,
+                                  args=(udp_socket, addr))
+        thread.start()
+        print(f"[Active Connection] {threading.activeCount() - 1}")
 
     print("Done giving all server IP")
     if thread:

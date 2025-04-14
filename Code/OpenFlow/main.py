@@ -2,12 +2,8 @@ import sys
 import requests
 import json
 
-sys.path.append("Classes")
-# import Classes.totalSwitches as tlSW
 from totalSwitches import OVSSwitches
 from pushFlows import PushFlow
-# from captureJSON import CaptureJSON
-# import Classes.aggregateFlow as aF
 
 allSwitch = PushFlow()
 def ping_node1_node3():
@@ -44,5 +40,7 @@ def runner():
     node2_setup()
 
 if __name__ == "__main__":
-    runner()
+    #runner()
+    total = OVSSwitches()
+    print(total.ReturnSwitches())
     #os.system("rm *.txt")
